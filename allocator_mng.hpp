@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 #include <sys/mman.h>
 using namespace std;
@@ -18,6 +19,10 @@ template <typename T> T* smart_mremap(T* old, const size_t old_size, const size_
   }
   
 } // namespace linux
+template <typename T>
+T* smart_align(std::size_t alignment, std::size_t size, T*& ptr, std::size_t& space) {
+  return (T*)align(align, size, ptr, space);
+}
 /* Очищает память и убирает эффект "висячего" указателя */
 template <typename T> void _free(T *&pptr) {
   free(pptr);
