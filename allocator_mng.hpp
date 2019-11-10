@@ -20,8 +20,10 @@ template <typename T> T* smart_mremap(T* old, const size_t old_size, const size_
   
 } // namespace linux
 template <typename T>
-T* smart_align(std::size_t alignment, std::size_t size, T*& ptr, std::size_t& space) {
-  return (T*)align(align, size, ptr, space);
+inline T* smart_align(void* pointer, uintptr_t mask) {
+  intptr_t value = reinterpret_cast<intptr_t>(pointer);
+  value += (-value) & mask;
+  return reinterpret_cast<T*>(value);
 }
 /* Очищает память и убирает эффект "висячего" указателя */
 template <typename T> void _free(T *&pptr) {
