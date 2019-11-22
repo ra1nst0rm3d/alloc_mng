@@ -1,2 +1,2 @@
 ## alloc_mng
-Memory allocator manager wrapper for single use only
+C-style Memory allocator manager wrapper for single use only
